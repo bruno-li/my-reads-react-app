@@ -1,6 +1,5 @@
 import React, { Component } from "react";
       
-    
     class SingleBookFetch extends Component {
         render(){
                 const { book } = this.props;
