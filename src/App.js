@@ -9,7 +9,17 @@ import BooksRead from "./BooksRead";
 import "./App.css";
 
 class BooksApp extends Component {
-  state = {};
+  state = {
+    allBooks: [], //store books from BooksAPI
+    searchBooks: [] // filter out books user search
+  };
+
+ // retrives all books after the component is mounted in the UI
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+        this.setState({allBooks: books}) // after promise is resolved, set up the state with books from the API
+    })
+  }
   
   render() {
     return (
@@ -27,7 +37,9 @@ class BooksApp extends Component {
             render={() => (
               <div className="list-books-content">
                 <div>
-                  <CurrentRead />
+                  <CurrentRead 
+                  books={this.state.allBooks}
+                   />
                   <WantToRead />
                   <BooksRead />
                 </div>
