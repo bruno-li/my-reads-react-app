@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
 import SearchBooks from "./Components/SearchBooks";
 import AllBooks from "./Components/AllBooks";
-
 import "./App.css";
 
 class BooksApp extends Component {
@@ -13,11 +12,20 @@ class BooksApp extends Component {
     searchBooks: [] // filter out books user search
   };
 
-  // retrives all books after the component is mounted in the UI
+  // retrives all books after the component is mount in the UI
   componentDidMount() {
     BooksAPI.getAll().then(books => {
       this.setState({ allBooks: books }); // after promise is resolved, set up the state with books from the API
     });
+  }
+
+  // update shelf when a book changes shelf
+  updateShelf = (book,shelf) => {
+    BooksAPI
+    .update(book,shelf)
+    .then(updated => (BooksAPI.getAll().then((books) => {
+    this.setState({allBooks:books})
+    })))
   }
 
   render() {
@@ -31,15 +39,14 @@ class BooksApp extends Component {
             render={() => (
               <AllBooks
               books={this.state.allBooks}
+              bookSelectOption={(book,shelf) => this.updateShelf(book,shelf)}
               />        
             )}
           />
 
            <div className="open-search">
                   <Link to="/search">Add a book</Link>
-                </div>
-
-
+            </div>
 
       </div> /* app div */
     );

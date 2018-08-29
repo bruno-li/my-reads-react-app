@@ -3,7 +3,7 @@ import SingleBookFetch from "./SingleBookFetch";
 
 class AllBooks extends Component {
   render() {
-    const { books } = this.props; //retrive the value from the app component props
+    const { books, bookSelectOption} = this.props; //retrive the value from the app component props
 
     return (
       <div className="list-books">
@@ -11,6 +11,7 @@ class AllBooks extends Component {
           <h1>My Reads</h1>
         </div>
         {/* list-books-title-div */}
+
         <div className="list-books-content">
           {/* BOOK CATEGORY SECTION */}
 
@@ -19,52 +20,58 @@ class AllBooks extends Component {
             <h2 className="bookshelf-title">Currently Reading</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
+                {/* filters book according to shelf property, then sends properties to book fetch component */}
                 {books
                   .filter(book => book.shelf === "currentlyReading")
                   .map(book => (
-                    <SingleBookFetch book={book} key={book.id} />
+                    <SingleBookFetch
+                      book={book}
+                      key={book.id}
+                      bookSelectOption={bookSelectOption}
+                    />
                   ))}
               </ol>
             </div>
           </div>
-                    {/* CURRENTLY READING ENDS */}
+          {/* CURRENTLY READING ENDS */}
 
-                     {/* WANT TO READ */}
+          {/* WANT TO READ */}
           <div className="bookshelf">
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {books
-                  .filter(book => book.shelf === "wantToRead")
-                  .map(book => (
-                    <SingleBookFetch book={book} key={book.id} />
-                  ))}
+                {books.filter(book => book.shelf === "wantToRead").map(book => (
+                  <SingleBookFetch
+                    book={book}
+                    key={book.id}
+                    bookSelectOption={bookSelectOption}
+                  />
+                ))}
               </ol>
             </div>
           </div>
-                    {/* WANT TO READ ENDS */}
+          {/* WANT TO READ ENDS */}
 
-
-                         {/* READ */}
+          {/* READ */}
           <div className="bookshelf">
             <h2 className="bookshelf-title">Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {books
-                  .filter(book => book.shelf === "read")
-                  .map(book => (
-                    <SingleBookFetch book={book} key={book.id} />
-                  ))}
+                {books.filter(book => book.shelf === "read").map(book => (
+                  <SingleBookFetch
+                    book={book}
+                    key={book.id}
+                    bookSelectOption={bookSelectOption}
+                  />
+                ))}
               </ol>
             </div>
           </div>
-                    {/*  READ ENDS */}
-
-
+          {/*  READ ENDS */}
 
           {/* BOOK CATEGORY SECTION  END */}
         </div>
-        {/* list-book-content */}
+        {/* list-book-content-div */}
       </div>
       //   list-books-div
     );
