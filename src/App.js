@@ -65,7 +65,7 @@ class BooksApp extends Component {
          render={() => <SearchBooks
             filterBooks = {this.state.filterBooks}
             searchBooks = {(query) => this.searchBooks(query)}
-            updateOption = {(book, shelf) => this.updateShelf(book,shelf)}
+            bookSelectOption = {(book, shelf) => this.updateShelf(book,shelf)}
           />
 
           }/>

@@ -5,7 +5,7 @@ import SingleBookFetch from "./SingleBookFetch";
 
 class SearchBooks extends Component {
   render() {
-    const {filterBooks, searchBooks, updateOption} = this.props;
+    const {filterBooks, searchBooks, bookSelectOption} = this.props;
     return (
           <div className="search-books">
             <div className="search-books-bar">
@@ -31,7 +31,7 @@ class SearchBooks extends Component {
                <SingleBookFetch
                book={book}
                key={book.id}
-               updateOption={updateOption}
+               bookSelectOption={bookSelectOption}
                />
               ))}
               </ol>
