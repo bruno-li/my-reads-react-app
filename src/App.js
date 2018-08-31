@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
 import SearchBooks from "./Components/SearchBooks";
 import AllBooks from "./Components/AllBooks";
+import SingleBookFetch from "./Components/SingleBookFetch";
+
 import "./App.css";
 
 class BooksApp extends Component {
@@ -45,7 +47,7 @@ class BooksApp extends Component {
   };
 
   // update state of the book
-  updateSearchResult = (value) => {
+  updateSearchResult = (values) => {
     for (let value of values) {
       for (let book of this.state.allBooks) {
         if (value.id === book.id) {
