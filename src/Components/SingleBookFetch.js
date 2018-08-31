@@ -6,9 +6,8 @@ class SingleBookFetch extends Component {
     let shelfValue = (book.shelf) ? book.shelf : "move" // condition to check the value of shelf for the select option
 
     return (
-
+      
       // populates list of books dinamically
-
       <li>
         <div className="book">
           <div className="book-top">
@@ -20,8 +19,8 @@ class SingleBookFetch extends Component {
                   width: 128,
                   height: 193,
                   backgroundImage: `url(${book.imageLinks.thumbnail})`
-                }}
-              />
+                }}>
+                </div>
             )}
 
             {/* SELECT FORM INPUT */}
@@ -29,9 +28,8 @@ class SingleBookFetch extends Component {
               <select 
               value={shelfValue} //it will show the shelf option according to shelf category
               onChange={(e) =>
-              bookSelectOption(book, e.target.value) // event listener for the target selection
-               }
-              >
+              bookSelectOption(book, e.target.value)}> // event listener for the target selection
+
                 <option value="move" disabled>
                   Move to...
                 </option>
