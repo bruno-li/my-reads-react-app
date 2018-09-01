@@ -11,6 +11,7 @@ class AllBooks extends Component {
   render() {
     const { books,updateShelf} = this.props; //retrive the value from the app component props
     return (
+
       <div className="list-books">
         <div className="list-books-title">
           <h1>My Reads</h1>
@@ -18,9 +19,9 @@ class AllBooks extends Component {
         {/* list-books-title-div */}
 
         <div className="list-books-content">
-          {/* BOOK CATEGORY SECTION */}
+          {/* BOOKSHELF CATEGORY SECTION */}
 
-          {/* CURRENTLY READING */}
+          {/* CURRENTLY READING SHELF */}
           <div className="bookshelf">
             <h2 className="bookshelf-title">Currently Reading</h2>
             <div className="bookshelf-books">
@@ -41,7 +42,7 @@ class AllBooks extends Component {
           </div>
           {/* CURRENTLY READING ENDS */}
 
-          {/* WANT TO READ */}
+          {/* WANT TO READ SHELF */}
           <div className="bookshelf">
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
@@ -58,7 +59,7 @@ class AllBooks extends Component {
           </div>
           {/* WANT TO READ ENDS */}
 
-          {/* READ */}
+          {/* READ SHELF */}
           <div className="bookshelf">
             <h2 className="bookshelf-title">Read</h2>
             <div className="bookshelf-books">

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import noCoverImage from '../icons/no_cover_thumb.gif';
 
-
 class SingleBookFetch extends Component {
   render() {
     const { book,updateShelf } = this.props; // book object from AllBooks component
@@ -11,15 +10,15 @@ class SingleBookFetch extends Component {
       <li>
         <div className="book">
           <div className="book-top">
-          {/* uses the imageLinks property from the book API to populate the images */}
+          {/* uses the imageLinks property from the book API to populate the images,
+           if no images found, it will use a default no cover image icon */}
             {book.imageLinks && (
               <div
                 className="book-cover"
                 style={{
                   width: 128,
                   height: 193,
-                backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : noCoverImage})` }}>
-                }}>
+                backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : noCoverImage})`}}>
                 </div>
             )}
 

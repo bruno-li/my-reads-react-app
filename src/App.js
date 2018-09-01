@@ -12,38 +12,37 @@ class BooksApp extends Component {
 
   // retrives all books after the component is mount in the DOM
   componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ allBooks: books});
+    BooksAPI.getAll().then(books => {
+      this.setState({ allBooks: books });
     });
   }
 
   // update shelf when a book changes shelf
   updateShelf = (book, newShelf) => {
-    BooksAPI
-    .update(book, newShelf)
-    .then((updated) => {
+    BooksAPI.update(book, newShelf).then(updated => {
       // change shelf property of book to a new select shelf category
       book.shelf = newShelf;
       // filter out book and push to array
-      let updateBooks = this.state.allBooks
-      .filter((resultBook) => resultBook.id !== book.id)
-      updateBooks.push(book)
+      let updateBooks = this.state.allBooks.filter(
+        resultBook => resultBook.id !== book.id
+      );
+      updateBooks.push(book);
       // set the state with the new books
-      this.setState({allBooks: updateBooks});
-    })
+      this.setState({ allBooks: updateBooks });
+    });
   };
 
   render() {
-      return (
+    return (
       <div className="app">
-
-        <Route path="/search"
-         render={() => (
-          <SearchBooks
-            filterBooks = {this.state.filterBooks}
-            books={this.state.allBooks}
-          />
-          )}/>
+        <Route
+          path="/search"
+          render={() => (
+            <SearchBooks
+              books={this.state.allBooks}
+            />
+          )}
+        />
 
         <Route
           exact
