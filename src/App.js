@@ -40,6 +40,7 @@ class BooksApp extends Component {
           render={() => (
             <SearchBooks
               books={this.state.allBooks}
+              updateShelf={this.updateShelf}
             />
           )}
         />

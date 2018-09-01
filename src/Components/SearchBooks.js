@@ -4,16 +4,16 @@ import SingleBookFetch from "./SingleBookFetch";
 import * as BooksAPI from "../BooksAPI";
 
 class SearchBooks extends Component {
+
   state = {
     searchResult: [],
     newBooks: [],
     searchError: false
-  };
+  }
 
   // function to search book through the API
   onSearch = (e) => {
         const searchQuery = e.target.value;
-
         if(searchQuery) {
             BooksAPI
             .search(searchQuery)
@@ -32,7 +32,7 @@ class SearchBooks extends Component {
 
    // Sync search result book shelf property with current shelf books
     syncBookShelfProperty = () => {
-        const books= this.state.newBooks;
+        const books = this.state.newBooks;
         const searchResult = this.state.searchResult
         if(searchResult.length > 0) {
                 books.forEach((book) => {
@@ -47,12 +47,14 @@ class SearchBooks extends Component {
     }
 
   render() {
-    const {searchResult} = this.state;
+    const {searchResult,searchError} = this.state;
+    const {updateShelf} = this.props; //retrive the value from the app component props
+
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
-
           <div className="search-books-input-wrapper">
             <input
               type="text"
@@ -76,13 +78,18 @@ class SearchBooks extends Component {
                   <SingleBookFetch
                     book={book}
                     key={book.id}
+                    updateShelf={updateShelf}
                   />
                 ))}
               </ol>
             </div>
           )}
 
-        
+          {searchError && (
+            <div>
+                <h3>No books found. Please try again!</h3>
+            </div>
+          )}
         </div>
       </div>
       // search-books-div

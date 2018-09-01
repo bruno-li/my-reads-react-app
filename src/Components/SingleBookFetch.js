@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import noCoverImage from '../icons/no_cover_thumb.gif';
+import SearchBooks from "./SearchBooks";
+
+
 
 class SingleBookFetch extends Component {
   render() {
-    const { book,updateShelf } = this.props; // book object from AllBooks component
+    const { book, updateShelf } = this.props; // book object from AllBooks component
     let shelfValue = (book.shelf) ? book.shelf : "move" // condition to check the value of shelf for the select option
     return (
       // populates list of books dinamically
