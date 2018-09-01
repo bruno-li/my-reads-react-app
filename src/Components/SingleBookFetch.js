@@ -4,7 +4,7 @@ class SingleBookFetch extends Component {
 
   
   render() {
-    const { book, books } = this.props; // book object from AllBooks component
+    const { book, books,updateShelf } = this.props; // book object from AllBooks component
     let shelfValue = (book.shelf) ? book.shelf : "move" // condition to check the value of shelf for the select option
 
     return (
@@ -28,7 +28,8 @@ class SingleBookFetch extends Component {
             <div className="book-shelf-changer">
               <select 
               defaultValue={shelfValue} //it will show the shelf option according to shelf category
-              onChange={}> // event listener for the target selection
+              onChange={(e) => updateShelf(book, e.target.value)}
+              > 
                 <option value="move" disabled>
                   Move to...
                 </option>

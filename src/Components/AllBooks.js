@@ -9,7 +9,7 @@ class AllBooks extends Component {
     books: PropTypes.array.isRequired
   }
   render() {
-    const { books} = this.props; //retrive the value from the app component props
+    const { books,updateShelf} = this.props; //retrive the value from the app component props
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -33,6 +33,7 @@ class AllBooks extends Component {
                       book={book}
                       books={books}
                       key={book.id}
+                      updateShelf={updateShelf}
                     />
                   ))}
               </ol>
@@ -47,8 +48,9 @@ class AllBooks extends Component {
               <ol className="books-grid">
                 {books.filter((book) => book.shelf === "wantToRead").map(book => (
                   <SingleBookFetch
-                    book={book}
-                    key={book.id}
+                      book={book}
+                      key={book.id}
+                      updateShelf={updateShelf}
                   />
                 ))}
               </ol>
@@ -63,8 +65,9 @@ class AllBooks extends Component {
               <ol className="books-grid">
                 {books.filter((book) => book.shelf === "read").map(book => (
                   <SingleBookFetch
-                    book={book}
-                    key={book.id}
+                       book={book}
+                      key={book.id}
+                      updateShelf={updateShelf}
                   />
                 ))}
               </ol>

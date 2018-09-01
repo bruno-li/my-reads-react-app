@@ -25,7 +25,7 @@ class BooksApp extends Component {
       // change shelf property of book to a new select shelf category
       book.shelf = newShelf;
       // filter out book and push to array
-      let updateBooks = this.state.books
+      let updateBooks = this.state.allBooks
       .filter((resultBook) => resultBook.id !== book.id)
       updateBooks.push(book)
       // set the state with the new books
@@ -50,6 +50,7 @@ class BooksApp extends Component {
           render={() => (
             <AllBooks
               books={this.state.allBooks}
+              updateShelf={this.updateShelf}
             />
           )}
         />
