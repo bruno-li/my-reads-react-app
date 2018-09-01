@@ -46,6 +46,7 @@ class BooksApp extends Component {
           )}/>
 
         <Route
+          exact
           path="/"
           render={() => (
             <AllBooks

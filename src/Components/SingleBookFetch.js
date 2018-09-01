@@ -1,12 +1,11 @@
 import React, { Component } from "react";
+import noCoverImage from '../icons/no_cover_thumb.gif';
+
 
 class SingleBookFetch extends Component {
-
-  
   render() {
-    const { book, books,updateShelf } = this.props; // book object from AllBooks component
+    const { book,updateShelf } = this.props; // book object from AllBooks component
     let shelfValue = (book.shelf) ? book.shelf : "move" // condition to check the value of shelf for the select option
-
     return (
       // populates list of books dinamically
       <li>
@@ -19,7 +18,7 @@ class SingleBookFetch extends Component {
                 style={{
                   width: 128,
                   height: 193,
-                  backgroundImage: `url(${book.imageLinks.thumbnail})`
+                backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : noCoverImage})` }}>
                 }}>
                 </div>
             )}
