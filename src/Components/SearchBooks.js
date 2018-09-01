@@ -2,31 +2,29 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import SingleBookFetch from "./SingleBookFetch";
 import * as BooksAPI from "../BooksAPI";
-// import serializeForm from "form-serialize";
 
 class SearchBooks extends Component {
-
   state = {
     query: "",
     newBooks: [],
     searchError: false
-  }
+  };
 
-  fectchBooks = (e) => {
-    const query = e.target.value.trim()
-    this.setState({query: query})
+  fectchBooks = e => {
+    const query = e.target.value;
+    this.setState({ query: query });
 
     // checks for inputs
     if (query) {
-      BooksAPI.search(query,20).then((books) => {
-        books.length > 0 ? this.setState({newBooks: books, searchError: false}) 
-        :
-        this.setState({newBooks: [], searchError: true})
-      })
+      BooksAPI.search(query, 20).then(books => {
+        books.length > 0
+          ? this.setState({ newBooks: books, searchError: false })
+          : this.setState({ newBooks: [], searchError: true });
+      });
     } else {
-      this.setState({newBooks: [], searchError: false})
+      this.setState({ newBooks: [], searchError: false });
     }
-  }
+  };
 
   render() {
     const { books, filterBooks, bookSelectOption } = this.props;
@@ -34,9 +32,11 @@ class SearchBooks extends Component {
 
     return (
       <div className="search-books">
-      
         <div className="search-books-bar">
-          <Link className="close-search" to="/"> Close </Link>
+          <Link className="close-search" to="/">
+            
+            Close
+          </Link>
 
           <div className="search-books-input-wrapper">
             <input
@@ -51,36 +51,31 @@ class SearchBooks extends Component {
         {/* search-books-bar */}
 
         <div className="search-books-results">
-        {
-            newBooks.length > 0 && (
-              <div>
-                <div className="">
-                  <h3>Search has returned { newBooks.length } books </h3>
-                </div>
-             <ol className="books-grid">
-            {newBooks.map((book) => (
-              <SingleBookFetch
-                book={book}
-                books={books}
-                key={book.id}
-                bookSelectOption={bookSelectOption}
-              />
-            ))}
-          </ol>
-             </div>
-            )}
-
-            {
-              searchError && (
-                <div>
-                  <div className="">
-              <h3>No books found.  Please try again!</h3>
+          {newBooks.length > 0 && (
+            <div>
+              <div className="">
+                <h3>Search has returned {newBooks.length} books </h3>
               </div>
-              </div>
+              <ol className="books-grid">
+                {newBooks.map(book => (
+                  <SingleBookFetch
+                    book={book}
+                    books={books}
+                    key={book.id}
+                    bookSelectOption={bookSelectOption}
+                  />
+                ))}
+              </ol>
+            </div>
+          )}
 
-              )
-            }
-  
+          {searchError && (
+            <div>
+              <div className="">
+                <h3>No books found. Please try again!</h3>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       // search-books-div

@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 
 class SingleBookFetch extends Component {
+
+  
   render() {
-    const { book, bookSelectOption } = this.props; // book object from AllBooks component
+    const { book, books } = this.props; // book object from AllBooks component
     let shelfValue = (book.shelf) ? book.shelf : "move" // condition to check the value of shelf for the select option
 
     return (
-      
       // populates list of books dinamically
       <li>
         <div className="book">
@@ -26,10 +27,8 @@ class SingleBookFetch extends Component {
             {/* SELECT FORM INPUT */}
             <div className="book-shelf-changer">
               <select 
-              value={shelfValue} //it will show the shelf option according to shelf category
-              onChange={(e) =>
-              bookSelectOption(book, e.target.value)}> // event listener for the target selection
-
+              defaultValue={shelfValue} //it will show the shelf option according to shelf category
+              onChange={}> // event listener for the target selection
                 <option value="move" disabled>
                   Move to...
                 </option>

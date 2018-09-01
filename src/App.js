@@ -7,25 +7,30 @@ import "./App.css";
 
 class BooksApp extends Component {
   state = {
-    allBooks: [], //store books from BooksAPI
-    filterBooks: [] // filter out books user search
+    allBooks: [] //store books from BooksAPI
   };
 
-  // retrives all books after the component is mount in the UI
+  // retrives all books after the component is mount in the DOM
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState({ allBooks: books}); // after promise is resolved, set up the state with books from the API
+      this.setState({ allBooks: books});
     });
   }
 
   // update shelf when a book changes shelf
-  updateShelf = (book, shelf) => {
+  updateShelf = (book, newShelf) => {
     BooksAPI
-    .update(book, shelf)
-    .then(updated => (BooksAPI.getAll().then((books) => {
-        this.setState({ allBooks: books })
-      })
-    ));
+    .update(book, newShelf)
+    .then((updated) => {
+      // change shelf property of book to a new select shelf category
+      book.shelf = newShelf;
+      // filter out book and push to array
+      let updateBooks = this.state.books
+      .filter((resultBook) => resultBook.id !== book.id)
+      updateBooks.push(book)
+      // set the state with the new books
+      this.setState({allBooks: updateBooks});
+    })
   };
 
   render() {
@@ -37,7 +42,6 @@ class BooksApp extends Component {
           <SearchBooks
             filterBooks = {this.state.filterBooks}
             books={this.state.allBooks}
-            bookSelectOption = {(book, shelf) => this.updateShelf(book,shelf)}
           />
           )}/>
 
@@ -46,7 +50,6 @@ class BooksApp extends Component {
           render={() => (
             <AllBooks
               books={this.state.allBooks}
-              bookSelectOption={(book, shelf) => this.updateShelf(book, shelf)}
             />
           )}
         />

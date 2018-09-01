@@ -9,7 +9,7 @@ class AllBooks extends Component {
     books: PropTypes.array.isRequired
   }
   render() {
-    const { books, bookSelectOption} = this.props; //retrive the value from the app component props
+    const { books} = this.props; //retrive the value from the app component props
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -31,8 +31,8 @@ class AllBooks extends Component {
                   .map(book => (
                     <SingleBookFetch
                       book={book}
+                      books={books}
                       key={book.id}
-                      bookSelectOption={bookSelectOption}
                     />
                   ))}
               </ol>
@@ -49,7 +49,6 @@ class AllBooks extends Component {
                   <SingleBookFetch
                     book={book}
                     key={book.id}
-                    bookSelectOption={bookSelectOption}
                   />
                 ))}
               </ol>
@@ -66,7 +65,6 @@ class AllBooks extends Component {
                   <SingleBookFetch
                     book={book}
                     key={book.id}
-                    bookSelectOption={bookSelectOption}
                   />
                 ))}
               </ol>
