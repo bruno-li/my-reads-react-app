@@ -2,14 +2,11 @@ import React, { Component } from "react";
 import * as BooksAPI from "../BooksAPI";
 import { Link } from "react-router-dom";
 import SingleBookFetch from "./SingleBookFetch";
-import PropTypes from 'prop-types'
 
 class AllBooks extends Component {
-
   state = {
     allBooks: [] //store books from BooksAPI
   };
-
     // Books are fetched after component is inserted into DOM
     componentDidMount() {
         BooksAPI.getAll().then((books) => {
@@ -26,8 +23,7 @@ class AllBooks extends Component {
       book.shelf = newShelf;
       // filter out book and push to array
       let updateBooks = this.state.allBooks.filter(
-        resultBook => resultBook.id !== book.id
-      );
+        resultBook => resultBook.id !== book.id);
       updateBooks.push(book);
       // set the state with the new books
       this.setState({ allBooks: updateBooks });
@@ -35,8 +31,8 @@ class AllBooks extends Component {
   };
 
   render() {
-    const {updateShelf} = this.props; //retrive the value from the app component props
     const {allBooks} = this.state;
+
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -58,8 +54,8 @@ class AllBooks extends Component {
                   .map(book => (
                     <SingleBookFetch
                       book={book}
-                      books={allBooks}
                       key={book.id}
+                      value={book.shelf ? book.shelf : "none"}
                       updateShelf={this.updateShelf}
                     />
                   ))}
@@ -105,7 +101,6 @@ class AllBooks extends Component {
         <div className="open-search">
           <Link to="/search">Add a book</Link>
         </div>
-
           {/* BOOK CATEGORY SECTION  END */}
         </div>
         {/* list-book-content-div */}

@@ -1,17 +1,13 @@
 import React from "react";
 import noCoverImage from '../icons/no-cover-image.png';
 
-
+// stateless component for rendering only
 const SingleBookFetch = (props) => {
-    const { book,updateShelf} = props; // book object from AllBooks component
+    const { book,updateShelf} = props;
     return (
-      // populates list of books dinamically
       <li>
         <div className="book">
           <div className="book-top">
-          {/* uses the imageLinks property from the book API to populate the images,
-           if no images found, it will use a default no cover image icon */}
-            
               <div
                 className="book-cover"
                 style={{
@@ -19,13 +15,12 @@ const SingleBookFetch = (props) => {
                   height: 193,
                  backgroundImage:`url(${book.imageLinks && book.imageLinks.thumbnail ? book.imageLinks.thumbnail : noCoverImage})`}}>
                 </div>
-          
+  
             {/* SELECT FORM INPUT */}
             <div className="book-shelf-changer">
               <select 
-              onChange={(e) => updateShelf(book, e.target.value)}
               value={book.shelf ? book.shelf : "none"}
-              > 
+              onChange={(e) => updateShelf(book, e.target.value)}> 
                 <option value="move" disabled>
                   Move to...
                 </option>
@@ -40,19 +35,16 @@ const SingleBookFetch = (props) => {
           {/* //book-top */}
 
           {/* GENERATES BOOK TITLE */}
-          <div className="book-title">{book.title}</div>
-          {book.author &&
+          <div className="book-title">{book.title ? book.title : null}</div>
+          {book.authors &&
             book.authors.map((author, index) => (
               <div key={index} className="book-authors">
                 {author}
               </div>
-              // book-authors
             ))}
         </div>
-        {/* //book */}
       </li>
     );
-  
 }
 
 export default SingleBookFetch;

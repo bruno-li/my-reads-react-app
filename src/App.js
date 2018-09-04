@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import * as BooksAPI from "./BooksAPI";
 import SearchBooks from "./Components/SearchBooks";
 import AllBooks from "./Components/AllBooks";
 import "./App.css";
@@ -11,9 +10,8 @@ class BooksApp extends Component {
       <div className="app">
         <Route exact path="/" component={AllBooks} />
         <Route path="/search" component={SearchBooks}/>
-      </div> /* app div */
+      </div>
     );
   }
 }
-
 export default BooksApp;

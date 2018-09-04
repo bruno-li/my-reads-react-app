@@ -11,6 +11,7 @@ class SearchBooks extends Component {
     searchError: false
   }
 
+
   // function to search book through the API
   onSearch = (e) => {
         const searchQuery = e.target.value;
@@ -47,7 +48,7 @@ class SearchBooks extends Component {
     }
 
 
-      // update shelf when a book changes shelf
+    // update shelf when a book changes shelf
   updateShelf = (book, shelf) => {
     BooksAPI.update(book,shelf).then(updated => {
       // change shelf property of book to a new select shelf category
@@ -62,10 +63,7 @@ class SearchBooks extends Component {
   };
 
   render() {
-    const {searchResult,searchError} = this.state;
-    // const {updateShelf} = this.props; //retrive the value from the app component props
-    // let shelfValue = books.shelf ? books.shelf : "none" // condition to check the value of shelf for the select option
-   
+    const {searchResult,searchError} = this.state;   
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -75,7 +73,6 @@ class SearchBooks extends Component {
               type="text"
               className="search-books-results"
               placeholder="Search books by title or author"
-              // value={query}
               onChange={this.onSearch}
             />
           </div>
@@ -98,7 +95,7 @@ class SearchBooks extends Component {
                 ))}
               </ol>
             </div>
-          )}
+          )} 
 
           {searchError && (
             <div>
@@ -107,7 +104,6 @@ class SearchBooks extends Component {
           )}
         </div>
       </div>
-      // search-books-div
     );
   }
 }
