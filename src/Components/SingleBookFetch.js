@@ -1,5 +1,5 @@
 import React from "react";
-import noCoverImage from '../icons/no_cover_thumb.gif';
+import noCoverImage from '../icons/no-cover-image.png';
 
 
 const SingleBookFetch = (props) => {
@@ -11,16 +11,15 @@ const SingleBookFetch = (props) => {
           <div className="book-top">
           {/* uses the imageLinks property from the book API to populate the images,
            if no images found, it will use a default no cover image icon */}
-            {book.imageLinks && (
+            
               <div
                 className="book-cover"
                 style={{
                   width: 128,
                   height: 193,
-                backgroundImage: `url(${book.imageLinks ? book.imageLinks.thumbnail : noCoverImage})`}}>
+                 backgroundImage:`url(${book.imageLinks && book.imageLinks.thumbnail ? book.imageLinks.thumbnail : noCoverImage})`}}>
                 </div>
-            )}
-
+          
             {/* SELECT FORM INPUT */}
             <div className="book-shelf-changer">
               <select 
