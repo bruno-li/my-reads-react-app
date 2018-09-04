@@ -4,8 +4,6 @@ import noCoverImage from '../icons/no_cover_thumb.gif';
 
 const SingleBookFetch = (props) => {
     const { book,updateShelf} = props; // book object from AllBooks component
-    console.log(book);
-    // let shelfValue = book.shelf ? book.shelf : "none" // condition to check the value of shelf for the select option
     return (
       // populates list of books dinamically
       <li>

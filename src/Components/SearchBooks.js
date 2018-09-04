@@ -46,10 +46,26 @@ class SearchBooks extends Component {
         this.setState({searchResult: searchResult})
     }
 
+
+      // update shelf when a book changes shelf
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book,shelf).then(updated => {
+      // change shelf property of book to a new select shelf category
+      book.shelf = shelf;
+      // filter out book and push to array
+      let updateBooks = this.state.newBooks.filter(
+        resultBook => resultBook.id !== book.id);
+      updateBooks.push(book);
+      // set the state with the new books
+      this.setState({ newBooks: updateBooks });
+    });
+  };
+
   render() {
     const {searchResult,searchError} = this.state;
-    const {updateShelf} = this.props; //retrive the value from the app component props
+    // const {updateShelf} = this.props; //retrive the value from the app component props
     // let shelfValue = books.shelf ? books.shelf : "none" // condition to check the value of shelf for the select option
+   
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -77,7 +93,7 @@ class SearchBooks extends Component {
                   <SingleBookFetch
                     book={book}
                     key={book.id}
-                    updateShelf={updateShelf}
+                    updateShelf={this.updateShelf}
                   />
                 ))}
               </ol>

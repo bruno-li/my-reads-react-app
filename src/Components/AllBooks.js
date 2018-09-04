@@ -1,17 +1,43 @@
 import React, { Component } from "react";
+import * as BooksAPI from "../BooksAPI";
 import { Link } from "react-router-dom";
 import SingleBookFetch from "./SingleBookFetch";
 import PropTypes from 'prop-types'
 
-
 class AllBooks extends Component {
-  static propTypes = {
-    books: PropTypes.array.isRequired
-  }
-  render() {
-    const { books,updateShelf} = this.props; //retrive the value from the app component props
-    return (
 
+  state = {
+    allBooks: [] //store books from BooksAPI
+  };
+
+    // Books are fetched after component is inserted into DOM
+    componentDidMount() {
+        BooksAPI.getAll().then((books) => {
+            this.setState({
+                allBooks: books
+            })
+        })
+    }
+
+  // update shelf when a book changes shelf
+  updateShelf = (book, newShelf) => {
+    BooksAPI.update(book, newShelf).then(updated => {
+      // change shelf property of book to a new select shelf category
+      book.shelf = newShelf;
+      // filter out book and push to array
+      let updateBooks = this.state.allBooks.filter(
+        resultBook => resultBook.id !== book.id
+      );
+      updateBooks.push(book);
+      // set the state with the new books
+      this.setState({ allBooks: updateBooks });
+    });
+  };
+
+  render() {
+    const {updateShelf} = this.props; //retrive the value from the app component props
+    const {allBooks} = this.state;
+    return (
       <div className="list-books">
         <div className="list-books-title">
           <h1>My Reads</h1>
@@ -27,14 +53,14 @@ class AllBooks extends Component {
             <div className="bookshelf-books">
               <ol className="books-grid">
                 {/* filters book according to shelf property, then sends properties to book fetch component */}
-                {books
+                {allBooks
                   .filter((book) => book.shelf === "currentlyReading")
                   .map(book => (
                     <SingleBookFetch
                       book={book}
-                      books={books}
+                      books={allBooks}
                       key={book.id}
-                      updateShelf={updateShelf}
+                      updateShelf={this.updateShelf}
                     />
                   ))}
               </ol>
@@ -47,11 +73,11 @@ class AllBooks extends Component {
             <h2 className="bookshelf-title">Want To Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {books.filter((book) => book.shelf === "wantToRead").map(book => (
+                {allBooks.filter((book) => book.shelf === "wantToRead").map(book => (
                   <SingleBookFetch
                       book={book}
                       key={book.id}
-                      updateShelf={updateShelf}
+                      updateShelf={this.updateShelf}
                   />
                 ))}
               </ol>
@@ -64,11 +90,11 @@ class AllBooks extends Component {
             <h2 className="bookshelf-title">Read</h2>
             <div className="bookshelf-books">
               <ol className="books-grid">
-                {books.filter((book) => book.shelf === "read").map(book => (
+                {allBooks.filter((book) => book.shelf === "read").map(book => (
                   <SingleBookFetch
                       book={book}
                       key={book.id}
-                      updateShelf={updateShelf}
+                      updateShelf={this.updateShelf}
                   />
                 ))}
               </ol>
