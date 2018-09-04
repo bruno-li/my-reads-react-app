@@ -66,7 +66,7 @@ class AllBooks extends Component {
               <ol className="books-grid">
                 {books.filter((book) => book.shelf === "read").map(book => (
                   <SingleBookFetch
-                       book={book}
+                      book={book}
                       key={book.id}
                       updateShelf={updateShelf}
                   />

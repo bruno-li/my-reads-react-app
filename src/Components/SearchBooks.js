@@ -49,8 +49,7 @@ class SearchBooks extends Component {
   render() {
     const {searchResult,searchError} = this.state;
     const {updateShelf} = this.props; //retrive the value from the app component props
-
-
+    // let shelfValue = books.shelf ? books.shelf : "none" // condition to check the value of shelf for the select option
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -70,11 +69,11 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           {searchResult.length > 0 && (
             <div>
-              <div className="">
+              <div>
                 <h3>Search has returned {searchResult.length} books </h3>
               </div>
               <ol className="books-grid">
-                {searchResult.map(book => (
+                {searchResult.map((book) => (
                   <SingleBookFetch
                     book={book}
                     key={book.id}

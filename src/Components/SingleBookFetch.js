@@ -1,13 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import noCoverImage from '../icons/no_cover_thumb.gif';
-import SearchBooks from "./SearchBooks";
 
 
-
-class SingleBookFetch extends Component {
-  render() {
-    const { book, updateShelf } = this.props; // book object from AllBooks component
-    let shelfValue = (book.shelf) ? book.shelf : "move" // condition to check the value of shelf for the select option
+const SingleBookFetch = (props) => {
+    const { book,updateShelf} = props; // book object from AllBooks component
+    console.log(book);
+    // let shelfValue = book.shelf ? book.shelf : "none" // condition to check the value of shelf for the select option
     return (
       // populates list of books dinamically
       <li>
@@ -28,8 +26,8 @@ class SingleBookFetch extends Component {
             {/* SELECT FORM INPUT */}
             <div className="book-shelf-changer">
               <select 
-              defaultValue={shelfValue} //it will show the shelf option according to shelf category
               onChange={(e) => updateShelf(book, e.target.value)}
+              value={book.shelf ? book.shelf : "none"}
               > 
                 <option value="move" disabled>
                   Move to...
@@ -57,7 +55,7 @@ class SingleBookFetch extends Component {
         {/* //book */}
       </li>
     );
-  }
+  
 }
 
 export default SingleBookFetch;
