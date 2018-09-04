@@ -8,10 +8,10 @@ The main page has three shelves that let users to move the books between shelves
 
 # How download and use app
 
-##Download:
+## Download:
  Click the "Clone or download" button then click "Download ZIP" and soon you'll get a zip file when your download finishes. Unzip the files.
 
-##Clone:
+## Clone:
  Type into your terminal or command prompt the following: $ git clone https://github.com/leizifei/my-reads-react-app.git
 
  # Launching the app
